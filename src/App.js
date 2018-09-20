@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Viz from './Viz';
+import PredictionLines from './PredictionLines';
 
 
 class App extends Component {
@@ -49,7 +49,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Viz data={this.state.data} size={{width: 800, height: 400}}></Viz>
+        <PredictionLines 
+          data={this.state.data}
+          size={{width: 800, height: 400}}
+          color={'blue'}
+          thickness={2}
+          circleRadius={5}
+        ></PredictionLines>
      
       </div>
     );
