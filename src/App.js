@@ -31,8 +31,8 @@ class App extends Component {
         endDate: new Date('23 October 2018 14:48 UTC'),
         startMileage: 1000,
         endMileage: 15000,
-        currentMileage: 500,
-        today: new Date('12 October 2018 14:48 UTC')
+        currentMileage: 14000,
+        today: new Date('22 October 2018 14:48 UTC')
       }
     ]
     }
@@ -40,7 +40,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Viz data={this.state.data} size={{width: 800, height: 800}}></Viz>
+        <Viz data={this.state.data} size={{width: 800, height: 400}}></Viz>
      
       </div>
     );

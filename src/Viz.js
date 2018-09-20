@@ -15,10 +15,14 @@ componentDidMount() {
  this.setupViz();
 }
 
+getLineData(d) {
+ return { time: 0.4, mileage: 0.5 }
+}
+
 
 setupViz() {
  const { data, size } = this.state;
-
+ // setup
  const timeProgress = d => 1 -
  moment.duration(moment(d.endDate).diff(moment(d.today)))
  / moment.duration(moment(d.endDate).diff(moment(d.startDate)));
@@ -39,10 +43,23 @@ setupViz() {
  const xAxis = axisBottom().scale(xScale);
  const yAxis = axisLeft().scale(yScale);
 
- svg.append('g')
- .attr('transform', `translate(10, ${size.height - 20})`).call(xAxis);
- svg.append('g')
- .attr('transform', 'translate(30, 0)').call(yAxis);
+ // rendering
+ svg.append('g').attr('transform', `translate(10, ${size.height - 20})`).call(xAxis);
+ svg.append('g').attr('transform', 'translate(30, 0)').call(yAxis);
+
+ const lines = svg.selectAll('line').data(data, d => d);
+ const zero = { x: 30, y: size.height - 20 };
+
+ lines.enter()
+  .append('line')
+  .attr('x1', zero.x)
+  .attr('y1', zero.y)
+  .attr('x2', d => xScale(timeProgress(d) * 100))
+  .attr('y2', d => yScale((d.currentMileage / d.endMileage) * 100))
+  .attr('stroke', 'black')
+  .attr('stroke-width', 1)
+
+
 
 }
 
