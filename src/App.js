@@ -33,6 +33,15 @@ class App extends Component {
         endMileage: 15000,
         currentMileage: 14000,
         today: new Date('22 October 2018 14:48 UTC')
+      },
+      {
+        id: 3,
+        startDate: new Date('02 October 2018 14:48 UTC'),
+        endDate: new Date('05 October 2018 14:48 UTC'),
+        startMileage: 1000,
+        endMileage: 15000,
+        currentMileage: 100,
+        today: new Date('03 October 2018 14:48 UTC')
       }
     ]
     }
