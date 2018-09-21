@@ -51,7 +51,7 @@ class App extends Component {
       <div className="App">
         <PredictionLines 
           data={this.state.data}
-          size={{width: 800, height: 400}}
+          size={{width: 500, height: 400}}
           color={'#0000cc'}
           thickness={2}
           xAxisText='Time progression (%)'

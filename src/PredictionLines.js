@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { select, event,hsl, axisBottom, axisLeft, scaleLinear } from 'd3';
+import { select, hsl, axisBottom, axisLeft, scaleLinear } from 'd3';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { handleMouseOut, handleMouseOutCircle, handleMouseOver, handleMouseOverCircle } from './Handlers';
@@ -44,7 +44,7 @@ doViz() {
  const xScaleAxis = scaleLinear().domain([0, 100]).range([PADDING, size.width - 80 ]).clamp(true);
  const yScaleAxis = scaleLinear().domain([100, 0]).range([PADDING, size.height - PADDING_2]).clamp(true);
  
- const xScale = scaleLinear().domain([0, 100]).range([PADDING, size.width - PADDING / 2]).clamp(true);
+ const xScale = scaleLinear().domain([0, 100]).range([PADDING, size.width - PADDING]).clamp(true);
  const yScale = scaleLinear().domain([100, 0]).range([PADDING, size.height - PADDING_2]).clamp(true);
  
  const xAxis = axisBottom().scale(xScaleAxis);
