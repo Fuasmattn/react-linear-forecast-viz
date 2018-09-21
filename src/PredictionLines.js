@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { select, event,hsl, axisBottom, axisLeft, scaleLinear } from 'd3';
-import { Util } from './Util';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { handleMouseOut, handleMouseOutCircle, handleMouseOver, handleMouseOverCircle } from './Handlers';
+import { Util } from './Util';
+
 
 const PADDING = 20;
 const PADDING_2 = PADDING * 2;
@@ -14,7 +16,7 @@ class PredictionLines extends Component {
    size: props.size,
    data: props.data,
    color: props.color,
-   circleRadius: props.circleRadius,
+   circleRadius: 4,
    thickness: props.thickness,
    yAxisText: props.yAxisText,
    xAxisText: props.xAxisText,
@@ -84,8 +86,8 @@ svg.append('text')
   .attr('stroke', primaryColor)
   .attr('opacity', .5)
   .attr('stroke-width', thickness)
-  .on('mouseover', this.handleMouseOver)
-  .on('mouseout', this.handleMouseOut);
+  .on('mouseover', handleMouseOver)
+  .on('mouseout', handleMouseOut);
 
 
   // forecast lines
@@ -95,7 +97,7 @@ svg.append('text')
   .attr('y1', d => yScale((d.currentMileage / d.endMileage) * 100))
   .attr('x2', d => xScale(100))
   .attr('y2', d => yScale(
-   this.slopeToPoint(
+   Util.slopeToPoint(
     ((d.currentMileage / d.endMileage) - (d.startMileage / d.endMileage)) / Util.timeProgress(d),
     (d.startMileage / d.endMileage)
   )))
@@ -109,33 +111,11 @@ svg.append('text')
    .attr('cy', d => yScale((d.currentMileage / d.endMileage) * 100))
    .attr('r', circleRadius)
    .attr('fill', darkerColor)
+
+   .on('mouseover', handleMouseOverCircle)
+   .on('mouseout', handleMouseOutCircle);
   
 }
-
-handleMouseOver = function(d, i) {
-  select(this).attr('opacity', 1);
-  const tooltip = select('.tooltip')
-  tooltip.transition()		
-    .duration(200)		
-    .style('opacity', .9);		
-  tooltip.html(
-    `<p><strong>${d.id}</strong></p>
- <p>Mileage: ${d.currentMileage}/${d.endMileage}km</p>
- <p>Start Mileage: ${d.startMileage}km</p>
- <p>End Date: ${moment(d.endDate).format('DD.MM.YYYY')}</p>
- `)	
-    .style('left', (event.pageX + 20) + 'px')		
-    .style('top', (event.pageY - 50) + 'px');			
-}
-handleMouseOut = function(d, i) {
-  select(this).attr('opacity', .5);
-  const tooltip = select('.tooltip')
-  tooltip.transition()		
-    .duration(500)		
-    .style('opacity', 0);	
-}
-
-slopeToPoint = (slope, startMileage) => (slope + startMileage) * 100;
 
  render() {
   const { width, height } = this.state.size;
@@ -152,7 +132,6 @@ PredictionLines.propTypes = {
  size: PropTypes.object,
  color: PropTypes.string,
  thickness: PropTypes.number,
- circleRadius: PropTypes.number,
  xAxisText: PropTypes.string,
  yAxisText: PropTypes.string,
 };

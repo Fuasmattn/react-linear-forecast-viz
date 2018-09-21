@@ -53,8 +53,7 @@ class App extends Component {
           data={this.state.data}
           size={{width: 800, height: 400}}
           color={'#0000cc'}
-          thickness={3}
-          circleRadius={0}
+          thickness={2}
           xAxisText='Time progression (%)'
           yAxisText='Mileage progression (%)'
         ></PredictionLines>
