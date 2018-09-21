@@ -13,7 +13,7 @@ class App extends Component {
         endDate: new Date('29 October 2018 14:48 UTC'),
         startMileage: 2000,
         endMileage: 10000,
-        currentMileage: 1500,
+        currentMileage: 6000,
         today:  new Date('17 October 2018 14:48 UTC')
       },
       {
@@ -40,7 +40,7 @@ class App extends Component {
         endDate: new Date('05 October 2018 14:48 UTC'),
         startMileage: 1000,
         endMileage: 15000,
-        currentMileage: 100,
+        currentMileage: 2000,
         today: new Date('03 October 2018 14:48 UTC')
       }
     ]
@@ -52,9 +52,11 @@ class App extends Component {
         <PredictionLines 
           data={this.state.data}
           size={{width: 800, height: 400}}
-          color={'blue'}
-          thickness={2}
+          color={'#0000cc'}
+          thickness={3}
           circleRadius={5}
+          xAxisText='Time progression (%)'
+          yAxisText='Mileage progression (%)'
         ></PredictionLines>
      
       </div>
